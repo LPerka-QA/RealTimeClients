@@ -300,6 +300,8 @@ public class AdminUser_NewWorkOrder extends BasePages {
 				
 				ClickSendWorkOrdertoUser();
 				
+				Thread.sleep(3000);
+				
 				ValidateNotifyMsg(row);
 				
 	}

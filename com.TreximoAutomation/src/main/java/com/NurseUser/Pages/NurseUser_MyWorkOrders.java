@@ -17,44 +17,45 @@ import jxl.read.biff.BiffException;
 
 public class NurseUser_MyWorkOrders extends BasePages {
 	
+	
 	AdminUser_LoginPageData Admindata = new AdminUser_LoginPageData();
 	NurseUser_LoginPageData data = new NurseUser_LoginPageData();
 	GoClinical_NurseUser_Menu MenuPage = new GoClinical_NurseUser_Menu();
 	
+	String WorkOrder;
 	
 	
 	
-	public void NurseUser_Home(int row) {
-		
 	
-
-		/*System.out.println(WorkOrder);
-		String WorkOrderNumber = WorkOrder.substring(11);
-		
-		System.out.println(WorkOrderNumber);*/
-
+	public void NurseUser_Home(int row) {	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 	}
 
 // Objects from Application
 // My Work Orders
-	public static WebElement readonly_MyWorkOrdersHeader() {
+	/*public static WebElement readonly_MyWorkOrdersHeader() {
 		return driver.findElement(By.xpath("//div[@class='work_orders']//h2[text()='My Work Orders']"));
 
-	}
+	}*/
 	
-	public static WebElement lnk_MyWrkOrdrsLtstRcrd() {
-		return driver.findElement(By.xpath("//a[@data-work-order-id='91' and @class='list-group-item work-order-without-record']"));
+	public WebElement lnk_MyWrkOrdrsLtstRcrd(int row) {
+     
+		WorkOrder = data.Getdata("Work Order Number", row);		
+		String WorkOrderNumber = WorkOrder.substring(11);
+		
+		
+		return driver.findElement(By.xpath("//a[@data-work-order-id='"+WorkOrderNumber+"' and @class='list-group-item work-order-without-record']"));
 
 	}
 	
 	public static WebElement readonly_VitalSignsHeader() {
-		return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1[text()='Vital Signs (VS)']"));
+		return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1"));
 
 	}
 	
 	public static WebElement readonly_PatientID() {
-		return driver.findElement(By.xpath("//form[@id='1']//p[contains(text(),'Patient ID: ')]//strong[text()='0004']"));
+		return driver.findElement(By.xpath("//form[@id='1']//p[contains(text(),'Patient ID: ')]//strong"));
 
 	}
 
@@ -98,8 +99,13 @@ public class NurseUser_MyWorkOrders extends BasePages {
 
 	}
 
+	public static WebElement readonly_RecordSubmitted() {
+		return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1"));
+
+	}
+	
 	public static WebElement readonly_RecordSubmittedMsg() {
-		return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1[text()='Record submitted']"));
+		return driver.findElement(By.xpath("//div[@class='col-xs-12']//p"));
 
 	}
 
@@ -108,10 +114,10 @@ public class NurseUser_MyWorkOrders extends BasePages {
 	// Each Object Performance Method
 	// My Work Orders Info
 	
-	public void ClickMyWrkOrdrLtstRcrd() throws IOException {
+	public void ClickMyWrkOrdrLtstRcrd(int row) throws IOException {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		clickMainMenu(lnk_MyWrkOrdrsLtstRcrd());
+		clickMainMenu(lnk_MyWrkOrdrsLtstRcrd(row));
 	}
 	
 	public void EnterBP_Systolic_mm_Hg(int row) throws IOException {
@@ -155,12 +161,12 @@ public class NurseUser_MyWorkOrders extends BasePages {
 	// Each Object Performance Method
 		// Verification Section
 
-	public void ValidateMyWorkOrdersHeader(int row) throws IOException {
+	/*public void ValidateMyWorkOrdersHeader(int row) throws IOException {
 		String ExpectedMyWrkOrdrsHeader = data.Getdata("Expected My Work Orders Header", row).trim();
 		verifyTextEqual(readonly_MyWorkOrdersHeader(), ExpectedMyWrkOrdrsHeader,
 				"Validate My Work Orders Header");
 
-	}
+	}*/
 	
 	public void ValidateVitalSignsHeader(int row) throws IOException {
 		String ExpectedVitalSignsHeader = data.Getdata("Expected Vital Signs Header", row).trim();
@@ -170,16 +176,22 @@ public class NurseUser_MyWorkOrders extends BasePages {
 	}
 	
 	public void ValidatePatientID(int row) throws IOException {
-		String ExpectedPatientID = data.Getdata("Expected Patient ID", row).trim();
+		String ExpectedPatientID = data.Getdata("Patient ID", row).trim();
 		verifyTextEqual(readonly_PatientID(), ExpectedPatientID,
 				"Validate Patient ID");
 
 	}
 	
-	public void ValidateRecordSubmittedMsg(int row) throws IOException {
-		String ExpectedRecordSubmittedMsg = data.Getdata("Expected Submit Record Message", row).trim();
-		verifyTextEqual(readonly_RecordSubmittedMsg(), ExpectedRecordSubmittedMsg,
+	public void ValidateRecordSubmitted(int row) throws IOException {
+		String ExpectedRecordSubmitted = data.Getdata("Expected Submit Record", row).trim();
+		verifyTextEqual(readonly_RecordSubmitted(), ExpectedRecordSubmitted,
 				"Validate Record Submitted Message");
+
+	}
+	
+	public void GetRecordSubmittedTxt(int row) throws IOException, BiffException {
+		String RecordSubmittedTxt = readonly_RecordSubmittedMsg().getText();
+		data.setData("Record Submitted Text", row, RecordSubmittedTxt);
 
 	}
 	
@@ -189,8 +201,9 @@ public class NurseUser_MyWorkOrders extends BasePages {
 	public void MyWorkOrders_VitalSigns(int row) throws IOException, InterruptedException, BiffException {
 		
 		NurseUser_Home(row);
-		ValidateMyWorkOrdersHeader(row);
-		ClickMyWrkOrdrLtstRcrd();
+		/*ValidateMyWorkOrdersHeader(row);*/
+		BasePages.scrollElementIntoView(lnk_MyWrkOrdrsLtstRcrd(row));
+		ClickMyWrkOrdrLtstRcrd(row);		
 		ValidateVitalSignsHeader(row);
 		ValidatePatientID(row);
 		EnterBP_Systolic_mm_Hg(row);				
@@ -201,7 +214,9 @@ public class NurseUser_MyWorkOrders extends BasePages {
 		EnterPassword();
 		BasePages.scrollElementIntoView(btn_SendtoHomeOffice());
 		ClickSendtoHomeOffice();
-		ValidateRecordSubmittedMsg(row);
+		Thread.sleep(4000);
+		ValidateRecordSubmitted(row);
+		GetRecordSubmittedTxt(row);
 				
 	}
 

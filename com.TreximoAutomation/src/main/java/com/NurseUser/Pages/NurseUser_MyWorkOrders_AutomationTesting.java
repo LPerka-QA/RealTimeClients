@@ -21,7 +21,8 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 	NurseUser_LoginPageData data = new NurseUser_LoginPageData();
 	GoClinical_NurseUser_Menu MenuPage = new GoClinical_NurseUser_Menu();
 		
-	static String WorkOrder;
+	String WorkOrder;
+	String Radio1;
 	
 	
 	public void NurseUser_Home() {
@@ -31,26 +32,21 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 
 // Objects from Application
 // My Work Orders
-	public static WebElement readonly_MyWorkOrdersHeader() {
+	/*public static WebElement readonly_MyWorkOrdersHeader() {
 		return driver.findElement(By.xpath("//div[@class='work_orders']//h2"));
 
-	}
+	}*/
 	
-	public static WebElement lnk_MyWrkOrdrsLtstRcrd(int row) {
-		//WorkOrder = data.Getdata("Work Order Number", row);
+	public WebElement lnk_MyWrkOrdrsLtstRcrd(int row) {
+		WorkOrder = data.Getdata("Work Order Number", row);
 		
 		System.out.println(WorkOrder);
 		String WorkOrderNumber = WorkOrder.substring(11);
 		
 		System.out.println(WorkOrderNumber);
 		
-		return driver.findElement(By.xpath("//a[@data-work-order-id='86' and @class='list-group-item work-order-without-record']"));
+		return driver.findElement(By.xpath("//a[@data-work-order-id='"+WorkOrderNumber+"' and @class='list-group-item work-order-without-record']"));
 
-	}
-	
-	private static void Admindata(String excelSheetPath12, String excel_SheetName12, String excelSheetPath13) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public static WebElement readonly_AutoTestingForm1Header() {
@@ -102,15 +98,11 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 
 	}
 	
-	public static WebElement rdbtn_Radio1_Yes() {
+	public WebElement rdbtn_Radio1(int row) {
+		
+		Radio1 = data.Getdata("RADIO 1", row);
 		  
-		   return driver.findElement(By.xpath("//input[@value='Yes' and @type='radio']"));		
-
-	}
-	
-	public static WebElement rdbtn_Radio1_No() {
-		  
-		   return driver.findElement(By.xpath("//input[@value='No' and @type='radio']"));		
+		   return driver.findElement(By.xpath("//input[@value='"+Radio1+"' and @type='radio']"));		
 
 	}
 
@@ -140,7 +132,7 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 	}
 
 	public static WebElement readonly_RecordSubmitted() {
-		return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1[text()='Record submitted']"));
+		return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1"));
 
 	}
 	
@@ -177,10 +169,8 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 	}
 	
 	public void Enter_DateField1(int row) throws IOException, InterruptedException {
-		Thread.sleep(10000);
 		String DateField1 = data.Getdata("DATE FIELD 1", row).trim();		
 		enterText(txt_DateField1(), "DATE FIELD 1", DateField1);
-		Thread.sleep(10000);
 	}
 	
 	public void Enter_TimeField1(int row) throws IOException {
@@ -193,14 +183,9 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 		selectByText(dpd_Dropdown1(), "DROP DOWN 1" , Dropdown1Value);		
 	}
 	
-	public void ClickRadio1_Yes() throws IOException {
+	public void ClickRadio1(int row) throws IOException {
 		
-		clickOnButton(rdbtn_Radio1_Yes(), "Radio1 Yes");
-	}
-	
-	public void ClickRadio1_No() throws IOException {
-		
-		clickOnButton(rdbtn_Radio1_No(), "Radio1 No");
+		clickOnButton(rdbtn_Radio1(row), "Radio1 Yes");
 	}
 
 
@@ -223,22 +208,20 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 	// Each Object Performance Method
 		// Verification Section
 
-	public void ValidateMyWorkOrdersHeader(int row) throws IOException {
-		String ExpectedMyWrkOrdrsHeader = data.Getdata("Expected My Work Orders Header", row).trim();
-		verifyTextEqual(readonly_MyWorkOrdersHeader(), ExpectedMyWrkOrdrsHeader,
-				"My Work Orders Header");
+	/*public void ValidateMyWorkOrdersHeader(int row) throws IOException {
+		String ExpectedMyWrkOrdrsHeader = data.Getdata("Expected Nurse Home Page", row).trim();
+		verifyCorrectPageHeading(readonly_MyWorkOrdersHeader(), ExpectedMyWrkOrdrsHeader);
 
-	}
+	}*/
 	
 	public void ValidateAutoTestingForm1Header(int row) throws IOException {
 		String ExpectedAutoTestingForm1Header = data.Getdata("Expected Auto Testing Form1 Header", row).trim();
-		verifyTextEqual(readonly_AutoTestingForm1Header(), ExpectedAutoTestingForm1Header,
-				"Auto Testing Form1 Header");
+		verifyCorrectPageHeading(readonly_AutoTestingForm1Header(), ExpectedAutoTestingForm1Header);
 
 	}
 	
 	public void ValidatePatientID(int row) throws IOException {
-		String ExpectedPatientID = data.Getdata("Expected Patient ID", row).trim();
+		String ExpectedPatientID = data.Getdata("Patient ID", row).trim();
 		verifyTextEqual(readonly_PatientID(), ExpectedPatientID,
 				"Validate Patient ID");
 
@@ -252,8 +235,8 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 	}
 	
 	public void GetRecordSubmittedTxt(int row) throws IOException, BiffException {
-		String ExpectedRecordSubmittedTxt = readonly_RecordSubmittedMsg().getText();
-		data.setData("Expected Record Submitted Text", row, ExpectedRecordSubmittedTxt);
+		String RecordSubmittedTxt = readonly_RecordSubmittedMsg().getText();
+		data.setData("Expected Record Submitted Text", row, RecordSubmittedTxt);
 
 	}
 	
@@ -262,24 +245,25 @@ public class NurseUser_MyWorkOrders_AutomationTesting extends BasePages {
 
 	public void MyWorkOrders_AutomationTesting(int row) throws IOException, InterruptedException, BiffException {
 		
-		ValidateMyWorkOrdersHeader(row);
-		//BasePages.scrollElementIntoView(lnk_MyWrkOrdrsLtstRcrd(row));
+		/*ValidateMyWorkOrdersHeader(row);*/
+		BasePages.scrollElementIntoView(lnk_MyWrkOrdrsLtstRcrd(row));
 		ClickMyWrkOrdrLtstRcrd(row);
 		ValidateAutoTestingForm1Header(row);
 		ValidatePatientID(row);
 		Enter_TextField1(row);
 		Enter_NumberField1(row);
 		UploadFile();
+		Thread.sleep(5000);
 		Enter_DateField1(row);
-		Enter_TimeField1(row);
-		Thread.sleep(10000);
-		SelectDropdown1(row);
-		ClickRadio1_Yes();
 		BasePages.scrollElementIntoView(btn_Continue());
+		Enter_TimeField1(row);
+		SelectDropdown1(row);
+		ClickRadio1(row);
 		ClickContinue();				
 		EnterPassword();
 		BasePages.scrollElementIntoView(btn_SendtoHomeOffice());
 		ClickSendtoHomeOffice();
+		Thread.sleep(5000);
 		ValidateRecordSubmitted(row);
 		GetRecordSubmittedTxt(row);
 				

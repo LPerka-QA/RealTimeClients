@@ -39,7 +39,7 @@ public class NurseUser_Login extends BasePages {
 		}
 		
 		public static WebElement readonly_MyWorkOrders() {
-			return driver.findElement(By.xpath("//div[@class='work_orders']//h2[text()='My Work Orders']"));
+			return driver.findElement(By.xpath("//div[@class='work_orders']//h2"));
 
 		}
 
@@ -62,13 +62,13 @@ public class NurseUser_Login extends BasePages {
 		
 		public void ValidateSignInMsg(int row) throws IOException {
 			String ExpectedSignInSuccessMsg = data.Getdata("Expected Signed In Message", row).trim();
-			verifyTextEqual(readonly_SignInSuccessMsg(), ExpectedSignInSuccessMsg, "Validate Sign In Message");
+			verifyTextEqual(readonly_SignInSuccessMsg(), ExpectedSignInSuccessMsg, "Validate Nurse User Sign In Message");
 
 		}
 		
 		public void ValidateMyWorkOrdersPageMsg(int row) throws IOException {
 			String ExpectedNurseHomePageMsg = data.Getdata("Expected Nurse Home Page", row).trim();
-			verifyTextEqual(readonly_MyWorkOrders(), ExpectedNurseHomePageMsg, "Validate My Work Orders Message");
+			verifyCorrectPageHeading(readonly_MyWorkOrders(), ExpectedNurseHomePageMsg);
 
 		}
 		
