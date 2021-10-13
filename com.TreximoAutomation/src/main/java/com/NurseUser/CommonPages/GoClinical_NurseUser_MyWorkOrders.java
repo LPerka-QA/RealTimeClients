@@ -5,21 +5,28 @@ import java.io.IOException;
 import com.NurseUser.CommonPages.GoClinical_NurseUser_Menu;
 import com.NurseUser.Pages.NurseUser_Login;
 import com.NurseUser.Pages.NurseUser_MyWorkOrders;
+import com.NurseUser.Pages.NurseUser_MyWorkOrders_AutomationTesting;
 import com.NurseUser.Pages.NurseUser_Records;
 
 import jxl.read.biff.BiffException;
 
 public class GoClinical_NurseUser_MyWorkOrders {
 	
-	public static void NurseUser_Login() throws IOException, InterruptedException {
+	public static void NurseUser_Login(int row) throws IOException, InterruptedException, BiffException {
 		NurseUser_Login getPage_PageLogin = new NurseUser_Login();
-		getPage_PageLogin.login();
+		getPage_PageLogin.login(row);
 	}
 
 	public static void MyWorkOrders_VitalSigns(int row)
 			throws IOException, InterruptedException, BiffException {
 		NurseUser_MyWorkOrders getPage_PageLogin = new NurseUser_MyWorkOrders();
 		getPage_PageLogin.MyWorkOrders_VitalSigns(row);
+	}
+	
+	public static void MyWorkOrders_AutoTestingForm1(int row)
+			throws IOException, InterruptedException, BiffException {
+		NurseUser_MyWorkOrders_AutomationTesting getPage_PageLogin = new NurseUser_MyWorkOrders_AutomationTesting();
+		getPage_PageLogin.MyWorkOrders_AutomationTesting(row);
 	}
 	
 	public static void Records(int row)

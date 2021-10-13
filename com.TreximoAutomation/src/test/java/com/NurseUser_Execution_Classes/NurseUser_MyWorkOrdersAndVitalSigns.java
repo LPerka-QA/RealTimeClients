@@ -23,11 +23,22 @@ public class NurseUser_MyWorkOrdersAndVitalSigns {
 	private static String ExcelSheetPath = null;
 	private static String Excel_SheetName = null;
 	private static String WritePath = null;
+	private static String ExcelSheetPath1 = null;
+	private static String Excel_SheetName1 = null;
+	private static String WritePath1 = null;
 	private static BasePages ReportingPages = null;
 	private static NurseUser_LoginPageData NurseUserMyWorkOrders = null;
+	private static AdminUser_LoginPageData AdminUserNewWorkOrder = null;
 		
 		@BeforeTest
 		public void TestSetup() throws IOException, BiffException {
+			
+			ExcelSheetPath1 = System.getProperty("user.dir") + "\\Resources\\TestData\\AdminUser_TestData.xls";
+			Excel_SheetName1 = "New Work Orders";
+			WritePath1 = System.getProperty("user.dir") + "\\Resources\\TestOutData\\AdminUser_TestOutData.xls";
+			AdminUserNewWorkOrder = new AdminUser_LoginPageData(ExcelSheetPath1, Excel_SheetName1, WritePath1);
+			
+			
 			
 								HTMLReportPAth = System.getProperty("user.dir") + "\\Resources\\Reports\\Daily Execution\\NurseUserMyWorkOrder.html";
 								CurrentPageTestCaseName = "Nurse User My Work Orders And Vital Signs";
@@ -51,7 +62,7 @@ public class NurseUser_MyWorkOrdersAndVitalSigns {
 
 								NurseUserMyWorkOrders.setData("Execution Status", row, "Started");
 						
-								GoClinical_NurseUser_MyWorkOrders.NurseUser_Login();
+								GoClinical_NurseUser_MyWorkOrders.NurseUser_Login(row);
 								GoClinical_NurseUser_MyWorkOrders.MyWorkOrders_VitalSigns(row);
 								GoClinical_NurseUser_MyWorkOrders.Records(row);
 								GoClinical_NurseUser_MyWorkOrders.GoCliniCal_NurseUser_Menu_ClickLogout();

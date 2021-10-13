@@ -249,7 +249,7 @@ public class BasePages {
 			if (element.getText().equalsIgnoreCase(ExpectedHeading)) {
 				ResultsLog.ReportPass(driver, "Successfully Navigated to" + ExpectedHeading, ExpectedHeading);
 			} else if (!element.getText().equalsIgnoreCase(ExpectedHeading)) {
-				ResultsLog.ReportFail(driver, "Application is not in correct page, Heading is", element.getText());
+				ResultsLog.ReportFail(driver, "Application is not in correct page and Heading is", element.getText());
 			}
 		} catch (Exception e) {
 
@@ -498,7 +498,7 @@ public class BasePages {
 						+ element.getText() + ") Expected Value (" + expectedText + ")");
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				ResultsLog.ReportFail(driver, "Error verifying:" + stepName + "EXCEPTION CAUGHT", ex.toString());
+				ResultsLog.ReportFail(driver, "Error Occured at " + stepName, ex.toString());
 			}
 		}
 	}

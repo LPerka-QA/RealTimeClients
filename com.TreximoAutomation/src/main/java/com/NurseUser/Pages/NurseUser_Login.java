@@ -10,6 +10,8 @@ import com.NurseUser.PagesData.NurseUser_LoginPageData;
 import com.Utils.BasePages;
 import com.Utils.LaunchBrowser;
 
+import jxl.read.biff.BiffException;
+
 public class NurseUser_Login extends BasePages {
 	
 	NurseUser_LoginPageData data = new NurseUser_LoginPageData();
@@ -60,13 +62,13 @@ public class NurseUser_Login extends BasePages {
 		
 		public void ValidateSignInMsg(int row) throws IOException {
 			String ExpectedSignInSuccessMsg = data.Getdata("Expected Signed In Message", row).trim();
-			verifyTextEqualwithAttributeValue(readonly_SignInSuccessMsg(), ExpectedSignInSuccessMsg, "Validate Sign In Message");
+			verifyTextEqual(readonly_SignInSuccessMsg(), ExpectedSignInSuccessMsg, "Validate Sign In Message");
 
 		}
 		
 		public void ValidateMyWorkOrdersPageMsg(int row) throws IOException {
 			String ExpectedNurseHomePageMsg = data.Getdata("Expected Nurse Home Page", row).trim();
-			verifyTextEqualwithAttributeValue(readonly_MyWorkOrders(), ExpectedNurseHomePageMsg, "Validate My Work Orders Message");
+			verifyTextEqual(readonly_MyWorkOrders(), ExpectedNurseHomePageMsg, "Validate My Work Orders Message");
 
 		}
 		
@@ -78,13 +80,13 @@ public class NurseUser_Login extends BasePages {
 
 	// Actual Functional Method 
 
-		public void login() throws IOException, InterruptedException {
+		public void login(int row) throws IOException, InterruptedException, BiffException {
 			LaunchURL();
 			EnterUserEmail();
 			EnterUserPassword();
 			ClickLogInButton();
-			//ValidateSignInMsg(row);
-			//ValidateAdminHomePageMsg(row);
+			ValidateSignInMsg(row);
+			ValidateMyWorkOrdersPageMsg(row);
 		}
 
 		// Negative Login Test -- User Name
@@ -93,7 +95,6 @@ public class NurseUser_Login extends BasePages {
 			enterText(txtUserEmail(), "Nurse User Email", "Testing@Test.com");
 			txtUserPassword().sendKeys(LaunchBrowser.TestSettingsObjects.getProperty("NurseUserPassword"));
 			clickOnButton(btnLog_In(), "Log In");
-
 		}
 
 		// Negative Login Test -- Password
@@ -102,7 +103,6 @@ public class NurseUser_Login extends BasePages {
 			enterText(txtUserEmail(), "Nurse User Email", LaunchBrowser.TestSettingsObjects.getProperty("NurseUserEmail"));
 			txtUserPassword().sendKeys("Password");
 			clickOnButton(btnLog_In(), "Log In");
-
 		}
 
 }

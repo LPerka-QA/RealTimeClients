@@ -56,8 +56,8 @@ public abstract class BasePage {
 		webDriver.switchTo().defaultContent();
 		waitForPageLoadToComplete();
 		waitForAjax();
-		PageFactory.initElements(webDriver, this);
-		report = new HTMLReporter("C:\\Users\\parigue\\eclipse-workspace\\CH_MGS_App\\Reports"); // Should work on PAth -- Pradeep
+		PageFactory.initElements(webDriver, this); 
+		report = new HTMLReporter(System.getProperty("user.dir")+ "\\Resources\\Reports"); // Should work on PAth -- Lokender
 		report.attachreporter("NewMember");
 	}
 

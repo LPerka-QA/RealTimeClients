@@ -38,13 +38,12 @@ public class AdminUser_Login extends BasePages {
 		}
 		
 		public static WebElement readonly_SignInSuccessMsg() {
-			return driver.findElement(By.xpath("//div[@class='notice']"));
+			return driver.findElement(By.xpath("//div[@class='notice']//p"));
 
 		}
 		
 		public static WebElement readonly_AdminHomePageMsg() {
-			return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1[text()='Admin Home Page']"));
-
+			return driver.findElement(By.xpath("//div[@class='col-xs-12']//h1"));
 		}
 
 	// Each Object  Method	
@@ -66,13 +65,13 @@ public class AdminUser_Login extends BasePages {
 		
 		public void ValidateSignInMsg(int row) throws IOException {
 			String ExpectedSignInSuccessMsg = data.Getdata("Expected Signed In Message", row).trim();
-			verifyTextEqualwithAttributeValue(readonly_SignInSuccessMsg(), ExpectedSignInSuccessMsg, "Validate Sign In Message");
+			verifyTextEqual(readonly_SignInSuccessMsg(), ExpectedSignInSuccessMsg, "Validate Sign In Message");
 
 		}
 		
 		public void ValidateAdminHomePageMsg(int row) throws IOException {
 			String ExpectedAdminHomePageMsg = data.Getdata("Expected Admin Home Page", row).trim();
-			verifyTextEqualwithAttributeValue(readonly_AdminHomePageMsg(), ExpectedAdminHomePageMsg, "Validate Admin Home Page Message");
+			verifyCorrectPageHeading(readonly_AdminHomePageMsg(), ExpectedAdminHomePageMsg);
 
 		}
 		

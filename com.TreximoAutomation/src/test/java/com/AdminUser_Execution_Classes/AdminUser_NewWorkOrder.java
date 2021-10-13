@@ -37,7 +37,7 @@ public class AdminUser_NewWorkOrder {
 									Excel_SheetName = "New Work Orders";
 									ReportingPages = new BasePages(HTMLReportPAth, CurrentPageTestCaseName);
 									WritePath = System.getProperty("user.dir") + "\\Resources\\TestOutData\\AdminUser_TestOutData.xls";
-									AdminUserNewWorkOrder = new AdminUser_LoginPageData(ExcelSheetPath, Excel_SheetName, WritePath);
+									AdminUserNewWorkOrder = new AdminUser_LoginPageData(ExcelSheetPath, Excel_SheetName, ExcelSheetPath);
 
 									BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);
 									AdminUserNewWorkOrder.ClearExistingStatus();
@@ -62,13 +62,14 @@ public class AdminUser_NewWorkOrder {
 					catch (Exception e) {
 												System.out.println("In Catch Main");
 												BasePages.ResultsLog.logger.log(Status.FAIL, e.toString() + " Row " + row);
+												
 					try {
 
 						}
 					catch (Exception e1) {
 												BasePages.ResultsLog.logger.log(Status.FAIL, "Error message not displayed");
 												BasePages.ExecutionPageExceptionErrorCapture(
-												CurrentPageTestCaseName + " Data Row Number, " + row, e.toString());
+												CurrentPageTestCaseName + " Data Row Number, " + row, e1.toString());
 
 						}
 

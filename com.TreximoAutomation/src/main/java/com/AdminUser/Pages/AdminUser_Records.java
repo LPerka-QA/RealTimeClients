@@ -20,7 +20,14 @@ public class AdminUser_Records extends BasePages {
 	GoClinical_AdminUser_Menu MenuPage = new GoClinical_AdminUser_Menu();
 	
 	
-	public void AdminUser_Home() {
+	
+	
+	
+	public void AdminUser_Home(int row) {
+		
+		String Protocol = data.Getdata("Protocol", row).trim();
+		String PatientID = data.Getdata("Patient ID", row).trim();
+		String Visit = data.Getdata("Visit", row).trim();
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
@@ -31,12 +38,13 @@ public class AdminUser_Records extends BasePages {
 	}
 	
 	public static WebElement readonly_RecordsHeader() {
-		return driver.findElement(By.xpath("//div[@id='records_index']//h1[conatins(text(),'Records')]"));
+		return driver.findElement(By.xpath("//div[@id='records_index']//h1"));
 
 	}
 	
 	public static WebElement readonly_LatestRecord() {
-		return driver.findElement(By.xpath("//td[text()='Demo-Study1']//..//td[text()='0004']//..//td[text()='Week 1']//..//td[text()='REVIEW']//..//td//a[contains(@href,'/records/') and text()='View']"));
+		
+		return driver.findElement(By.xpath("//td[text()= Protocol]//..//td[text()= PatientID]//..//td[text()= Visit]//..//td[text()='REVIEW']//..//td//a[contains(@href,'/records/') and text()='View']"));
 
 	}	
 	
@@ -56,17 +64,17 @@ public class AdminUser_Records extends BasePages {
 	}
 	
 	public static WebElement readonly_BloodPressure_Systolic_mm_Hg() {
-		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Systolic mm Hg)')]//..//td[contains(text(),'140')]"));
+		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Systolic mm Hg)')]//..//td"));
 
 	}
 	
 	public static WebElement readonly_BloodPressure_Diastolic_mm_Hg() {
-		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Diastolic mm Hg)')]//..//td[contains(text(),'90')]"));
+		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Diastolic mm Hg)')]//..//td"));
 
 	}
 	
 	public static WebElement readonly_HeartRate() {
-		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Heart Rate')]//..//td[contains(text(),'190')]"));
+		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Heart Rate')]//..//td"));
 
 	}
 	
@@ -104,36 +112,35 @@ public class AdminUser_Records extends BasePages {
 
 	public void ValidateRecordsHeader(int row) throws IOException {
 		String ExpectedRecordsHeader = data.Getdata("Expected Records Header", row).trim();
-		verifyTextEqualwithAttributeValue(readonly_RecordsHeader(), ExpectedRecordsHeader,
-				"Validate Records Header");
+		verifyCorrectPageHeading(readonly_RecordsHeader(), ExpectedRecordsHeader);
 
 	}
 	
 	public void ValidateLatestRecord(int row) throws IOException {
 		String ExpectedLatestRecord = data.Getdata("Expected Latest Record", row).trim();
-		verifyTextEqualwithAttributeValue(readonly_LatestRecord(), ExpectedLatestRecord,
+		verifyTextEqual(readonly_LatestRecord(), ExpectedLatestRecord,
 				"Validate latest Record");
 
 	}
 	
 	public void ValidateBloodPressureSystolic(int row) throws IOException {
 		String ExpectedBPSystolic = data.Getdata("Expected Blood Pressure Systolic", row).trim();
-		verifyTextEqualwithAttributeValue(readonly_BloodPressure_Systolic_mm_Hg(), ExpectedBPSystolic,
-				"Validate Blood Pressure Systolic Value");
+		verifyTextEqual(readonly_BloodPressure_Systolic_mm_Hg(), ExpectedBPSystolic,
+				"Blood Pressure Systolic Value is ");
 
 	}
 	
 	public void ValidateBloodPressureDiastolic(int row) throws IOException {
 		String ExpectedBPDiastolic = data.Getdata("Expected Blood Pressure Diastolic", row).trim();
-		verifyTextEqualwithAttributeValue(readonly_BloodPressure_Diastolic_mm_Hg(), ExpectedBPDiastolic,
-				"Validate Blood Pressure Diastolic Value");
+		verifyTextEqual(readonly_BloodPressure_Diastolic_mm_Hg(), ExpectedBPDiastolic,
+				"Blood Pressure Diastolic Value is");
 
 	}
 	
 	public void ValidateHeartRate(int row) throws IOException {
 		String ExpectedHeartRate = data.Getdata("Expected Heart Rate", row).trim();
-		verifyTextEqualwithAttributeValue(readonly_HeartRate(), ExpectedHeartRate,
-				"Validate Heart Rate Value");
+		verifyTextEqual(readonly_HeartRate(), ExpectedHeartRate,
+				"Heart Rate Value is");
 
 	}
 	
@@ -145,12 +152,12 @@ public class AdminUser_Records extends BasePages {
 		
 		
 		ClickRecordsHeader();
-		//ValidateRecordsHeader(row);
-		//ValidateLatestRecord(row);
+		ValidateRecordsHeader(row);
+		ValidateLatestRecord(row);
 		ClickViewLatestRecord();
-		//ValidateBloodPressureSystolic(row);
-		//ValidateBloodPressureDiastolic(row);
-		//ValidateHeartRate(row);
+		ValidateBloodPressureSystolic(row);
+		ValidateBloodPressureDiastolic(row);
+		ValidateHeartRate(row);
 				
 	}
 

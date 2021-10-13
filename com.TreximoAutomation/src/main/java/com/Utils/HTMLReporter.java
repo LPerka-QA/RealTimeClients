@@ -60,7 +60,6 @@ public class HTMLReporter {
 	}
 
 	public void ReportFail(WebDriver driver, String Desc, String Error) throws IOException {
-
 		CaptureScreenShot(driver, Desc + "Fail");
 		logger.log(Status.FAIL, Desc);
 		logger.warning(Error);
@@ -105,7 +104,7 @@ public class HTMLReporter {
 		try {
 
 			String timeStamp = customDate();
-			String snapshotpath = "C:\\Users\\parigue\\eclipse-workspace\\CH_MGS_App\\ScreenShots" + "\\"
+			String snapshotpath = System.getProperty("user.dir")+ "\\Resources\\ScreenShots" + "\\"
 					+ screenShotName + timeStamp + ".png";
 
 			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -118,6 +117,24 @@ public class HTMLReporter {
 			return null;
 		}
 	}
+	
+	/*public String CaptureScreenShot(WebDriver driver, String screenShotName) {
+		try {
+
+			String timeStamp = customDate();
+			String snapshotpath = System.getProperty("user.dir")+ "\\Resources\\ScreenShots" + "\\"
+					+ screenShotName + timeStamp + ".png";
+
+			File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			File targetFile = new File(snapshotpath);
+			FileUtils.copyFile(screenshotFile, targetFile);
+
+			return screenShotName;
+		} catch (Exception e) {
+			System.out.println("An exception occured while taking screenshot " + e.getCause());
+			return null;
+		}
+	}*/
 
 	public String customDate() {
 		Date date = new Date();

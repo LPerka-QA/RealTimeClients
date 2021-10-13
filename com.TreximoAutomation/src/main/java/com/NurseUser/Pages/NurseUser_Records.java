@@ -16,10 +16,19 @@ public class NurseUser_Records  extends BasePages {
 	
 	NurseUser_LoginPageData data = new NurseUser_LoginPageData();
 	GoClinical_NurseUser_Menu MenuPage = new GoClinical_NurseUser_Menu();
+	String Protocol;
+	String PatientId;
+	String Visit;
 	
-	public void NurseUser_RecordsPage() {
+	public void NurseUser_RecordsPage(int row) {
 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		/*String RecordId = data.Getdata("Expected My Work Orders Header", row).trim();
+		String WorkOrderId = data.Getdata("Expected My Work Orders Header", row).trim();*/
+		
+		Protocol = data.Getdata("Protocol", row).trim();
+		PatientId = data.Getdata("Patient ID", row).trim();
+		Visit = data.Getdata("Visit", row).trim();
+		
 	}
 	
 	// Objects from Application
@@ -31,14 +40,15 @@ public class NurseUser_Records  extends BasePages {
 		}
 		
 		public static WebElement readonly_RecordsHeader() {
-			return driver.findElement(By.xpath("//div[@id='records_index']//h1[conatins(text(),'Records')]"));
+			return driver.findElement(By.xpath("//div[@id='records_index']//h1[contains(text(),'Records')]"));
 
 		}
 		
-		public static WebElement readonly_LatestRecord() {
-			return driver.findElement(By.xpath("//table[@class='table table-bordered table-condensed table-hover']//td[text()='Demo-Study1']//..//td[text()='0004']//..//td[text()='Week 1']//..//td[text()='REVIEW']"));
+		public WebElement readonly_GetLatestRecord_CreatedDate() {
+			return driver.findElement(By.xpath("//table[@class='table table-condensed table-hover']//td[text()='"+Protocol+"']//..//td[text()='"+PatientId+"']//..//td[text()='"+Visit+"']//..//td[text()='REVIEW']//..//td[8]"));
 
-		}		
+		}
+		
 		
 
 		
@@ -60,15 +70,21 @@ public class NurseUser_Records  extends BasePages {
 
 		public void ValidateRecordsHeader(int row) throws IOException {
 			String ExpectedRecordsHeader = data.Getdata("Expected Records Header", row).trim();
-			verifyTextEqualwithAttributeValue(readonly_RecordsHeader(), ExpectedRecordsHeader,
+			verifyTextEqual(readonly_RecordsHeader(), ExpectedRecordsHeader,
 					"Validate Records Header");
 
 		}
 		
 		public void ValidateLatestRecord(int row) throws IOException {
 			String ExpectedLatestRecord = data.Getdata("Expected Latest Record", row).trim();
-			verifyTextEqualwithAttributeValue(readonly_LatestRecord(), ExpectedLatestRecord,
+			verifyTextEqual(readonly_GetLatestRecord_CreatedDate(), ExpectedLatestRecord,
 					"Validate latest Record");
+
+		}
+		
+		public void GetLtstRcrdCrtdDate(int row) throws IOException, BiffException {
+			String LatestRecordCreateDate = readonly_GetLatestRecord_CreatedDate().getText();
+			data.setData("Latest Record Created Date", row, LatestRecordCreateDate);
 
 		}
 		
@@ -78,13 +94,11 @@ public class NurseUser_Records  extends BasePages {
 		// Actual Functional Method 
 
 		public void Records(int row) throws IOException, InterruptedException, BiffException {
-			
-			
+			NurseUser_RecordsPage(row);
 			ClickRecordsHeader();
-			//ValidateRecordsHeader(row);
-			//ValidateLatestRecord(row);
-			
-					
+			ValidateRecordsHeader(row);
+			GetLtstRcrdCrtdDate(row);
+			//ValidateLatestRecord(row);			
 		}
 
 }

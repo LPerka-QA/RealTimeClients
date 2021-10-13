@@ -3,20 +3,6 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder">
-        <methods>
-          <include name="LaunchGoClinicalAPP"/>
-          <include name="CloseTest"/>
-          <include name="TestSetup"/>
-        </methods>
-      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder -->
-      <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords">
-        <methods>
-          <include name="TestSetup"/>
-          <include name="CloseTest"/>
-          <include name="LaunchGoClinicalAPP"/>
-        </methods>
-      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_ReviewRecords -->
       <class name="com.NurseUser_Execution_Classes.NurseUser_MyWorkOrdersAndVitalSigns">
         <methods>
           <include name="CloseTest"/>

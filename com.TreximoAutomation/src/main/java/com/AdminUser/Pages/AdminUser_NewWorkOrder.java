@@ -27,6 +27,8 @@ public class AdminUser_NewWorkOrder extends BasePages {
 
 	AdminUser_LoginPageData data = new AdminUser_LoginPageData();
 	GoClinical_AdminUser_Menu MenuPage = new GoClinical_AdminUser_Menu();
+	String PatientIDValue;
+	String WorkOrderRecordNumber;
 	
 	
 	
@@ -39,9 +41,10 @@ public class AdminUser_NewWorkOrder extends BasePages {
 // New Work Order
 	
 	public static WebElement dpd_Sponsor() {
-		return driver.findElement(By.name("sponsor_id"));
+		return driver.findElement(By.id("sponsor_id"));
 
 	}
+	
 
 	public static WebElement dpd_Protocol() {
 		return driver.findElement(By.xpath("//select[@id='work_order_protocol_id']"));
@@ -79,37 +82,91 @@ public class AdminUser_NewWorkOrder extends BasePages {
 	}
 
 	public static WebElement readonly_WrkOrdrCrteSuccessMsg() {
-		return driver.findElement(By.xpath("//div[@class='notice']//p[text()='Work order was successfully created.']"));
-
+		return driver.findElement(By.xpath("//div[@class='notice']//p"));
+		
 	}
-
 	
-
+	public static WebElement readonly_WorkOrderNumber() {
+		return driver.findElement(By.xpath("//div[@class='col-xs-12' and @id='work_order_show']//h1"));
+		
+	}
+	
+	public static WebElement readonly_ActiveStatus() {
+		return driver.findElement(By.xpath("//div[@class='col-md-6']//dl[@class='dl-horizontal']//dt[text()='Active Status']//..//dd"));
+		
+	}
+	
+	public static WebElement readonly_Status() {
+		return driver.findElement(By.xpath("//dt//..//span[@class='label label-primary']"));
+		
+	}
+	
+	public static WebElement readonly_PatientID() {
+		return driver.findElement(By.xpath("//div[@class='col-md-6']//dl[@class='dl-horizontal']//dt[text()='Patient']//..//dd[3]"));
+		
+	}
+	
+	public static WebElement readonly_Protocol() {
+		return driver.findElement(By.xpath("//div[@class='col-md-6']//dl[@class='dl-horizontal']//dt[text()='Protocol']//..//dd[4]"));
+		
+	}
+	
+	public static WebElement readonly_Visit() {
+		return driver.findElement(By.xpath("//div[@class='col-md-6']//dl[@class='dl-horizontal']//dt[text()='Visit']//..//dd[5]"));
+		
+	}
+	
+	public static WebElement readonly_ServiceProvider() {
+		return driver.findElement(By.xpath("//div[@class='col-md-6']//dl[@class='dl-horizontal']//dt[text()='Service Provider']//..//em"));
+		
+	}
+	
+	public static WebElement PaperOriginalLnk() {
+		return driver.findElement(By.xpath("//a[contains(@href,'/records/new') and text()='(Paper original?)']"));
+		
+	}
+	
+	public static WebElement SendWorktoUserBtn() {
+		return driver.findElement(By.xpath("//input[@value='Send Work Order to Lokendernath-rvsp Perka' and @type='submit']"));
+		
+	}
+	
+	public static WebElement EditLnk() {
+		return driver.findElement(By.xpath("//a[contains(@href,'/work_orders/') and text()='Edit']"));
+		
+	}
+	
+	public static WebElement BacktoWorkOrdersLnk() {
+		return driver.findElement(By.xpath("//a[@href='/work_orders' and text()='Back to Work Orders']"));
+		
+	}
+	
+	public static WebElement readonly_NotifyMsg() {
+		return driver.findElement(By.xpath("//div[@id='notify']//p[@class='bg-success']"));
+		
+	}
+	
+	
 	// Each Object Performance Method
 	// New Work Order Info
 	
+	
 	public void SelectSponsor(int row) throws IOException, InterruptedException {		
-		String SponsorValue = data.Getdata("Sponsor", row);
-		Thread.sleep(6000);
-		//clickOnLink(dpd_Sponsor(), "Sponsor");
-		Thread.sleep(6000);
-		selectByText(dpd_Sponsor(), "Sponsor" , "PPG Auto Testing Sponsor");
-		Thread.sleep(6000);
+		String SponsorValue = data.Getdata("Sponsor", row);		
+		selectByText(dpd_Sponsor(), "Sponsor" , SponsorValue);		
 	}	
 
 	public void SelectProtocol(int row) throws IOException, InterruptedException  {
-		Thread.sleep(6000);
 		String ProtocolValue = data.Getdata("Protocol", row).trim();
 		selectByText(dpd_Protocol(), "Protocol", ProtocolValue);
 	}	
 
 	public void EnterPatientID(int row) throws IOException {
-		String PatientIDValue = data.Getdata("Patient ID", row).trim();
+		PatientIDValue = data.Getdata("Patient ID", row).trim();
 		enterText(txt_PatientID(), "Patient ID", PatientIDValue);
 	}
 
 	public void SelectVisit(int row) throws IOException {
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		String VisitValue = data.Getdata("Visit", row).trim();
 		selectByText(dpd_Visit(), "Visit", VisitValue);
 	}	
@@ -120,7 +177,6 @@ public class AdminUser_NewWorkOrder extends BasePages {
 	}
 
 	public void SelectSndRcrdTo_SiteCntct(int row) throws IOException {
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		String SendRecordtoSiteContactValue = data.Getdata("Send Record to Site Contact", row).trim();
 		selectByText(dpd_SndRcrdTo_SiteCntct(), "Send Record To (Site Contact)", SendRecordtoSiteContactValue);
 	}
@@ -128,10 +184,14 @@ public class AdminUser_NewWorkOrder extends BasePages {
 	// Each Object Performance Method
 	// Submit Section
 		
-	public void ClickCreateWorkOrder() throws IOException {
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		
+	public void ClickCreateWorkOrder() throws IOException {		
 		clickOnButton(btn_CreateWorkOrder(), "Create Work order");
+		
+	}
+	
+	public void ClickSendWorkOrdertoUser() throws IOException {		
+		clickOnButton(SendWorktoUserBtn(), "Send Work Order to User");
+		
 	}
 	
 	// Each Object Performance Method
@@ -139,14 +199,67 @@ public class AdminUser_NewWorkOrder extends BasePages {
 
 	public void ValidateCrtWrkOrdrSuccessMsg(int row) throws IOException {
 		String ExpectedCrtWrkOrdrSuccessMsg = data.Getdata("Expected Work Order Created Message", row).trim();
-		verifyTextEqualwithAttributeValue(readonly_WrkOrdrCrteSuccessMsg(), ExpectedCrtWrkOrdrSuccessMsg,
-				"Validate Create Work Order Success Message");
-
+		verifyTextEqual(readonly_WrkOrdrCrteSuccessMsg(), ExpectedCrtWrkOrdrSuccessMsg,
+				"New Work Order with PatientID " + PatientIDValue);
+	}
+	
+	public void GetWrkOrdrNmbr(int row) throws IOException, BiffException {
+		
+		WorkOrderRecordNumber = readonly_WorkOrderNumber().getText();		
+		data.setData("Work Order Number", row, WorkOrderRecordNumber);
+		
+	}
+	
+	public void GetActiveStatus(int row) throws IOException, BiffException {
+		
+		String ActiveStatus = readonly_ActiveStatus().getText();		
+		data.setData("Active Status", row, ActiveStatus);
+		
+	}
+	
+	public void GetStatus(int row) throws IOException, BiffException {
+		
+		String Status = readonly_Status().getText();		
+		data.setData("Status", row, Status);
+		
+	}
+	
+	public void ValidatePatientID(int row) throws IOException {
+		String PatientId = data.Getdata("Patient ID", row).trim();
+		verifyTextEqual(readonly_PatientID(), PatientId,
+				"PatientID");
+	}
+	
+	public void ValidateProtocol(int row) throws IOException {
+		String ExpectedProtocol = data.Getdata("Protocol", row).trim();
+		verifyTextEqual(readonly_Protocol(), ExpectedProtocol,
+				"Protocol");
+	}
+	
+	public void ValidateVisit(int row) throws IOException {
+		String ExpectedVisit = data.Getdata("Visit", row).trim();
+		verifyTextEqual(readonly_Visit(), ExpectedVisit,
+				"Visit");
+	}
+	
+	public void ValidateSrvcePrvdr(int row) throws IOException {
+		String ExpectedSrvcePrvdrEmail = data.Getdata("Service Provider Email RVSP", row).trim();
+		verifyTextEqual(readonly_ServiceProvider(), ExpectedSrvcePrvdrEmail,
+				"Service Provider Email RVSP");
+	}
+	
+	public void ValidateNotifyMsg(int row) throws IOException, BiffException {
+		
+		if(readonly_NotifyMsg().getText().contains(data.Getdata("Service Provider Email RVSP", row))== true)
+		{
+		String NotifyMsg = readonly_NotifyMsg().getText();		
+		data.setData("Notification Message", row, NotifyMsg);
+		}
+		
 	}
 	
 	
-	// Actual Functional Method 
-
+	// Actual Functional Method
 	public void WorkOrders_New(int row) throws Exception {
 		
 		MenuPage.ClickWorkOrders();
@@ -154,7 +267,6 @@ public class AdminUser_NewWorkOrder extends BasePages {
 		MenuPage.ClickWorkOrdersNew();
 		
 				SelectSponsor(row);
-				Thread.sleep(6000);
 				
 				SelectProtocol(row);
 				
@@ -164,15 +276,31 @@ public class AdminUser_NewWorkOrder extends BasePages {
 				
 				EnterSrvcePrvdrEmail_RVSP(row);
 				
-				SelectSndRcrdTo_SiteCntct(row);		
-				
-				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				SelectSndRcrdTo_SiteCntct(row);
 				
 				BasePages.scrollElementIntoView(btn_CreateWorkOrder());
 				
 				ClickCreateWorkOrder();
 				
-				//ValidateCrtWrkOrdrSuccessMsg(row);
+				ValidateCrtWrkOrdrSuccessMsg(row);
+				
+				GetWrkOrdrNmbr(row);
+				
+				GetActiveStatus(row);
+				
+				GetStatus(row);
+				
+				ValidatePatientID(row);
+				
+				ValidateProtocol(row);
+				
+				ValidateVisit(row);
+				
+				ValidateSrvcePrvdr(row);
+				
+				ClickSendWorkOrdertoUser();
+				
+				ValidateNotifyMsg(row);
 				
 	}
 
