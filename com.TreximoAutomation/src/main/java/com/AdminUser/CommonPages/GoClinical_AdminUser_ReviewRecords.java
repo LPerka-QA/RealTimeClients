@@ -20,6 +20,12 @@ public class GoClinical_AdminUser_ReviewRecords {
 		getPage_PageLogin.Records(row);
 	}
 	
+	public static void Review_AutomationTesting_Records(int row)
+			throws IOException, InterruptedException, BiffException {
+		AdminUser_Records getPage_PageLogin = new AdminUser_Records();
+		getPage_PageLogin.AutomationTestingRecords(row);
+	}
+	
 	public static void GoCliniCal_AdminUser_Menu_ClickLogout() throws IOException, InterruptedException {
 		GoClinical_AdminUser_Menu getPage_PageLogout = new GoClinical_AdminUser_Menu();
 		getPage_PageLogout.ClickWelcomUser();

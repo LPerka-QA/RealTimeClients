@@ -23,7 +23,7 @@ import jxl.write.WriteException;
 
 
 
-public class AdminUser_NewWorkOrder {
+public class AdminUser_NewWorkOrder_AutomationTesting {
 	
 	private static String HTMLReportPAth = null;
 	private static String CurrentPageTestCaseName = null;
@@ -33,29 +33,27 @@ public class AdminUser_NewWorkOrder {
 	private static BasePages ReportingPages = null;
 	private static AdminUser_LoginPageData AdminUserNewWorkOrder = null;
 	
-	
 	//This method used to add a time stamp to name of HTML report
-			public static String DateTime() {
-				Date date = new Date();
-				DateFormat df = new SimpleDateFormat("MM_dd_yyyy hh_mm_ss");
-				String timeStamp = df.format(date);
-				return timeStamp;
-			}
-			
-			
+		public static String DateTime() {
+			Date date = new Date();
+			DateFormat df = new SimpleDateFormat("MM_dd_yyyy hh_mm_ss");
+			String timeStamp = df.format(date);
+			return timeStamp;
+		}
+		
 		@BeforeTest
 		public void TestSetup() throws IOException, BiffException {
-						
-			String Name = "Admin User New Work Orders Vital Signs";
+			
+			String Name = "Admin User New Work Orders Automation Testing";
 			String timeStamp = DateTime();
 			String ReportName = Name+"_"+ timeStamp+".html";
 						
 									HTMLReportPAth = System.getProperty("user.dir") + "\\Resources\\Reports\\Daily Execution\\"+ReportName;
 									CurrentPageTestCaseName = "Admin User New Work Orders";
-									ExcelSheetPath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_VitalAndSigns_TestData.xls";
+									ExcelSheetPath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_AutoTestingForm_TestData.xls";
 									Excel_SheetName = "My Work Orders";
 									ReportingPages = new BasePages(HTMLReportPAth, CurrentPageTestCaseName);
-									WritePath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_VitalAndSigns_TestData.xls";
+									WritePath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_AutoTestingForm_TestData.xls";
 									AdminUserNewWorkOrder = new AdminUser_LoginPageData(ExcelSheetPath, Excel_SheetName, WritePath);
 
 									BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);

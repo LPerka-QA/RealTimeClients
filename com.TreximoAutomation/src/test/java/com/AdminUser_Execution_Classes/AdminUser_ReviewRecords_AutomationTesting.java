@@ -19,7 +19,7 @@ import com.aventstack.extentreports.Status;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 
-public class AdminUser_ReviewRecords {
+public class AdminUser_ReviewRecords_AutomationTesting {
 	
 	private static String HTMLReportPAth = null;
 	private static String CurrentPageTestCaseName = null;
@@ -28,29 +28,29 @@ public class AdminUser_ReviewRecords {
 	private static String WritePath = null;
 	private static BasePages ReportingPages = null;
 	private static AdminUser_LoginPageData AdminUserReviewRecords = null;
-		
+	
+	
 	//This method used to add a time stamp to name of HTML report
-		public static String DateTime() {
-			Date date = new Date();
-			DateFormat df = new SimpleDateFormat("MM_dd_yyyy hh_mm_ss");
-			String timeStamp = df.format(date);
-			return timeStamp;
-		}
-		
+	public static String DateTime() {
+		Date date = new Date();
+		DateFormat df = new SimpleDateFormat("MM_dd_yyyy hh_mm_ss");
+		String timeStamp = df.format(date);
+		return timeStamp;
+	}
 		
 		@BeforeTest
 		public void TestSetup() throws IOException, BiffException {					
 			
-			String Name = "Admin User Review Records Vital Signs";
+			String Name = "Admin User Review Records Automation Testing";
 			String timeStamp = DateTime();
 			String ReportName = Name+"_"+ timeStamp+".html";
 						
 									HTMLReportPAth = System.getProperty("user.dir") + "\\Resources\\Reports\\Daily Execution\\"+ReportName;
 									CurrentPageTestCaseName = "Admin User Review Records";
-									ExcelSheetPath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_VitalAndSigns_TestData.xls";
+									ExcelSheetPath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_AutoTestingForm_TestData.xls";
 									Excel_SheetName = "My Work Orders";
 									ReportingPages = new BasePages(HTMLReportPAth, CurrentPageTestCaseName);
-									WritePath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_VitalAndSigns_TestData.xls";
+									WritePath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_AutoTestingForm_TestData.xls";
 									AdminUserReviewRecords = new AdminUser_LoginPageData(ExcelSheetPath, Excel_SheetName, WritePath);
 
 									BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);
@@ -61,13 +61,13 @@ public class AdminUser_ReviewRecords {
 		@Test
 		public void LaunchGoClinicalAPP() throws IOException, InterruptedException, BiffException, WriteException {
 			for (int row = 1; row < AdminUserReviewRecords.GetRows(); row++) {
-				if (AdminUserReviewRecords.Getdata("Blood Pressure Systolic mm Hg", row).trim().length() > 2) {
+				if (AdminUserReviewRecords.Getdata("Patient ID", row).trim().length() > 2) {
 					try {
 
 											AdminUserReviewRecords.setData("Admin Records Execution Status", row, "Started");
 			
 											GoClinical_AdminUser_ReviewRecords.AdminUser_Login(row);
-											GoClinical_AdminUser_ReviewRecords.Review_Records(row);
+											GoClinical_AdminUser_ReviewRecords.Review_AutomationTesting_Records(row);
 											GoClinical_AdminUser_NewWorkOrder.GoCliniCal_AdminUser_Menu_ClickLogout();
 			
 											AdminUserReviewRecords.setData("Admin Records Execution Status", row, "Executed");

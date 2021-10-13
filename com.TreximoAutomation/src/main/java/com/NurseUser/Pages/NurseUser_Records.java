@@ -19,12 +19,15 @@ public class NurseUser_Records  extends BasePages {
 	String Protocol;
 	String PatientId;
 	String Visit;
+	String WorkOrder;
+	String WorkOrderNumber;
 	
 	public void NurseUser_RecordsPage(int row) {
 
-		/*String RecordId = data.Getdata("Expected My Work Orders Header", row).trim();
-		String WorkOrderId = data.Getdata("Expected My Work Orders Header", row).trim();*/
+		/*String RecordId = data.Getdata("Expected My Work Orders Header", row).trim();*/
 		
+		WorkOrder = data.Getdata("Work Order Number", row);		
+		WorkOrderNumber = WorkOrder.substring(11);
 		Protocol = data.Getdata("Protocol", row).trim();
 		PatientId = data.Getdata("Patient ID", row).trim();
 		Visit = data.Getdata("Visit", row).trim();
@@ -45,7 +48,7 @@ public class NurseUser_Records  extends BasePages {
 		}
 		
 		public WebElement readonly_GetLatestRecord_CreatedDate() {
-			return driver.findElement(By.xpath("//table[@class='table table-condensed table-hover']//td[text()='"+Protocol+"']//..//td[text()='"+PatientId+"']//..//td[text()='"+Visit+"']//..//td[text()='REVIEW']//..//td[8]"));
+			return driver.findElement(By.xpath("//table[@class='table table-condensed table-hover']//td[text()='"+WorkOrderNumber+"']//..//td[text()='"+Protocol+"']//..//td[text()='"+PatientId+"']//..//td[text()='"+Visit+"']//..//td[text()='REVIEW']//..//td[8]"));
 
 		}
 		
@@ -69,7 +72,7 @@ public class NurseUser_Records  extends BasePages {
 			// Verification Section
 
 		public void ValidateRecordsHeader(int row) throws IOException {
-			String ExpectedRecordsHeader = data.Getdata("Expected Records Header", row).trim();
+			String ExpectedRecordsHeader = data.Getdata("Expected Nurse Records Header", row).trim();
 			verifyTextEqual(readonly_RecordsHeader(), ExpectedRecordsHeader,
 					"Validate Records Header");
 
