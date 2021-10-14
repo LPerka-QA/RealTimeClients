@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.NurseUser_Execution_Classes.NurseUser_MyWorkOrdersAndVitalSigns">
+      <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting">
         <methods>
-          <include name="CloseTest"/>
-          <include name="TestSetup"/>
           <include name="LaunchGoClinicalAPP"/>
+          <include name="TestSetup"/>
+          <include name="CloseTest"/>
         </methods>
-      </class> <!-- com.NurseUser_Execution_Classes.NurseUser_MyWorkOrdersAndVitalSigns -->
+      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

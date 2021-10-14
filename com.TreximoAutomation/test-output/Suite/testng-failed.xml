@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test1(failed)">
+    <parameter name="Browser" value="chrome"/>
+    <classes>
+      <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting">
+        <methods>
+          <include name="LaunchGoClinicalAPP"/>
+          <include name="TestSetup"/>
+          <include name="CloseTest"/>
+        </methods>
+      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting -->
+    </classes>
+  </test> <!-- Test1(failed) -->
+  <test thread-count="5" name="Test2(failed)">
+    <classes>
+      <class name="com.NurseUser_Execution_Classes.NurseUser_MyWorkOrders_AutoTestingForm1">
+        <methods>
+          <include name="TestSetup"/>
+          <include name="CloseTest"/>
+          <include name="LaunchGoClinicalAPP"/>
+        </methods>
+      </class> <!-- com.NurseUser_Execution_Classes.NurseUser_MyWorkOrders_AutoTestingForm1 -->
+    </classes>
+  </test> <!-- Test2(failed) -->
+</suite> <!-- Failed suite [Suite] -->

@@ -56,7 +56,7 @@ public class NurseUser_MyWorkOrdersAndVitalSigns {
 								ExcelSheetPath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_VitalAndSigns_TestData.xls";
 								Excel_SheetName = "My Work Orders";
 								ReportingPages = new BasePages(HTMLReportPAth, CurrentPageTestCaseName);
-								WritePath = System.getProperty("user.dir") + "\\Resources\\TestOutData\\MyWorkOrders_VitalAndSigns_TestData.xls";
+								WritePath = System.getProperty("user.dir") + "\\Resources\\TestData\\MyWorkOrders_VitalAndSigns_TestData.xls";
 								NurseUserMyWorkOrders = new NurseUser_LoginPageData(ExcelSheetPath, Excel_SheetName, WritePath);
 
 								BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);
