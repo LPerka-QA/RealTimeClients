@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="25642" started-at="2021-10-13T23:36:44 IST" finished-at="2021-10-13T23:37:10 IST">
+  <suite name="Default suite" duration-ms="29674" started-at="2021-10-14T12:23:48 IST" finished-at="2021-10-14T12:24:18 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="25642" started-at="2021-10-13T23:36:44 IST" finished-at="2021-10-13T23:37:10 IST">
-      <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords">
-        <test-method status="PASS" signature="TestSetup()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords@4e4aea35]" name="TestSetup" is-config="true" duration-ms="6790" started-at="2021-10-13T23:36:44 IST" finished-at="2021-10-13T23:36:51 IST">
+    <test name="Default test" duration-ms="29674" started-at="2021-10-14T12:23:48 IST" finished-at="2021-10-14T12:24:18 IST">
+      <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting">
+        <test-method status="PASS" signature="TestSetup()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting@4e4aea35]" name="TestSetup" is-config="true" duration-ms="4535" started-at="2021-10-14T12:23:48 IST" finished-at="2021-10-14T12:23:53 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TestSetup -->
-        <test-method status="PASS" signature="LaunchGoClinicalAPP()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords@4e4aea35]" name="LaunchGoClinicalAPP" duration-ms="18695" started-at="2021-10-13T23:36:51 IST" finished-at="2021-10-13T23:37:10 IST">
+        <test-method status="PASS" signature="LaunchGoClinicalAPP()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting@4e4aea35]" name="LaunchGoClinicalAPP" duration-ms="25044" started-at="2021-10-14T12:23:53 IST" finished-at="2021-10-14T12:24:18 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchGoClinicalAPP -->
-        <test-method status="PASS" signature="CloseTest()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords@4e4aea35]" name="CloseTest" is-config="true" duration-ms="120" started-at="2021-10-13T23:37:10 IST" finished-at="2021-10-13T23:37:10 IST">
+        <test-method status="PASS" signature="CloseTest()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting@4e4aea35]" name="CloseTest" is-config="true" duration-ms="74" started-at="2021-10-14T12:24:18 IST" finished-at="2021-10-14T12:24:18 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseTest -->
-      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_ReviewRecords -->
+      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

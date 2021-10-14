@@ -69,6 +69,11 @@ public class AdminUser_Records extends BasePages {
 
 	}
 	
+	public static WebElement Lnk_Next() {
+		return driver.findElement(By.xpath("//a[@href='/records?page=2' and text()='Next ›']"));
+
+	}
+	
 	public  static WebElement readonly_WorkOrdersID() {
 		return driver.findElement(By.xpath("//table[@class='table table-condensed']//tbody//tr[3]//th[text()='Work Order ID:']//..//td"));
 
@@ -95,17 +100,17 @@ public class AdminUser_Records extends BasePages {
 	}
 	
 	public static WebElement readonly_BloodPressure_Systolic_mm_Hg() {
-		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Systolic mm Hg)')]//..//td"));
+		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Systolic mm Hg)')]//..//td[2][contains(text(),'')]"));
 
 	}
 	
 	public static WebElement readonly_BloodPressure_Diastolic_mm_Hg() {
-		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Diastolic mm Hg)')]//..//td"));
+		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Blood Pressure (Diastolic mm Hg)')]//..//td[2][contains(text(),'')]"));
 
 	}
 	
 	public static WebElement readonly_HeartRate() {
-		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Heart Rate')]//..//td"));
+		return driver.findElement(By.xpath("//h2[text()='Vital Signs']//..//td[contains(text(),'Heart Rate')]//..//td[2][contains(text(),'')]"));
 
 	}
 	
@@ -176,8 +181,17 @@ public class AdminUser_Records extends BasePages {
 	
 	public void ValidateLatestRecord(int row) throws IOException {
 		String ExpectedLatestRecord = data.Getdata("Expected Admin User Latest Record", row).trim();
+		if(driver.findElements(By.xpath("//td[text()='\"+WorkOrderNumber+\"']//..//td[text()='\"+Protocol+\"']//..//td[text()='\"+PatientID+\"']//..//td[text()='\"+Visit+\"']//..//td[text()='REVIEW']//..//td[text()='\"+RecordCreatedDate+\"']//..//td//a[contains(@href,'/records/')]") ).size() != 0)
+		{
 		verifyTextEqual(readonly_LatestRecord(), ExpectedLatestRecord,
 				"Validate latest Record");
+		}
+		else
+		{
+			clickOnLink(Lnk_Next(), "Send to Study Site");
+			verifyTextEqual(readonly_LatestRecord(), ExpectedLatestRecord,
+					"Validate latest Record");
+		}
 
 	}
 	
@@ -240,7 +254,7 @@ public class AdminUser_Records extends BasePages {
 	
 	public void ValidateRadio1(int row) throws IOException {
 		String ExpectedRadio1 = data.Getdata("RADIO 1", row).trim();
-		verifyTextEqual(readonly_StudyVisit(), ExpectedRadio1,
+		verifyTextEqual(readonly_Radio1(), ExpectedRadio1,
 				"Radio 1 Value is ");
 
 	}
@@ -269,7 +283,7 @@ public class AdminUser_Records extends BasePages {
 		ClickRecordsHeader();
 		ValidateRecordsHeader(row);
 		AdminUser_Home(row);
-		BasePages.scrollElementIntoView(readonly_LatestRecord());
+		BasePages.scrollElementIntoView(Lnk_Next());
 		ValidateLatestRecord(row);
 		ClickViewLatestRecord();
 		ValidateBloodPressureSystolic(row);
@@ -287,7 +301,7 @@ public void AutomationTestingRecords(int row) throws IOException, InterruptedExc
 		ClickRecordsHeader();
 		ValidateRecordsHeader(row);
 		AdminUser_Home(row);
-		BasePages.scrollElementIntoView(readonly_LatestRecord());
+		BasePages.scrollElementIntoView(Lnk_Next());
 		ValidateLatestRecord(row);
 		ClickViewLatestRecord();
 		ValidateWorkOrdersID(row);
