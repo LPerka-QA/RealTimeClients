@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.AdminUser.CommonPages.GoClinical_AdminUser_NewWorkOrder;
@@ -37,9 +38,9 @@ public class AdminUser_ReviewRecords {
 			return timeStamp;
 		}
 		
-		
+		@Parameters("browserName")
 		@BeforeTest
-		public void TestSetup() throws IOException, BiffException {					
+		public void TestSetup(String browserName) throws IOException, BiffException {					
 			
 			String Name = "Admin User Review Records Vital Signs";
 			String timeStamp = DateTime();
@@ -55,7 +56,7 @@ public class AdminUser_ReviewRecords {
 
 									BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);
 									AdminUserReviewRecords.ClearExistingStatus();
-									LaunchBrowser.LaunchBrowserapp();
+									LaunchBrowser.LaunchBrowserapp(browserName);
 		}
 
 		@Test

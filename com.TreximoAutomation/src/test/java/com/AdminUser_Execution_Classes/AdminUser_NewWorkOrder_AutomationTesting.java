@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.Date;
@@ -41,8 +42,9 @@ public class AdminUser_NewWorkOrder_AutomationTesting {
 			return timeStamp;
 		}
 		
+		@Parameters("browserName")
 		@BeforeTest
-		public void TestSetup() throws IOException, BiffException {
+		public void TestSetup(String browserName) throws IOException, BiffException {
 			
 			String Name = "Admin User New Work Orders Automation Testing";
 			String timeStamp = DateTime();
@@ -59,7 +61,7 @@ public class AdminUser_NewWorkOrder_AutomationTesting {
 									BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);
 									AdminUserNewWorkOrder.ClearExistingStatus();
 			
-			LaunchBrowser.LaunchBrowserapp();
+			LaunchBrowser.LaunchBrowserapp(browserName);
 		}
 
 		@Test

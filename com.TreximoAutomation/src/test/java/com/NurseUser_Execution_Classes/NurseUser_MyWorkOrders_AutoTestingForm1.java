@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.AdminUser.CommonPages.GoClinical_AdminUser_NewWorkOrder;
@@ -42,8 +43,9 @@ public class NurseUser_MyWorkOrders_AutoTestingForm1 {
 				return timeStamp;
 			}
 		
+		@Parameters("browserName")
 		@BeforeTest
-		public void TestSetup() throws IOException, BiffException {			
+		public void TestSetup(String browserName) throws IOException, BiffException {			
 			
 			
 			String Name = "Nurse My Work Records Automation Testing";
@@ -61,7 +63,7 @@ public class NurseUser_MyWorkOrders_AutoTestingForm1 {
 								BasePages.ResultsLog.ReportScriptStarted(CurrentPageTestCaseName);
 								NurseUserMyWorkOrders.ClearExistingStatus();			
 			
-								LaunchBrowser.LaunchBrowserapp();
+								LaunchBrowser.LaunchBrowserapp(browserName);
 		}
 
 		@Test
