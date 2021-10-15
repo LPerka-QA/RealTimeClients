@@ -1,25 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="1" failed="0" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="29674" started-at="2021-10-14T12:23:48 IST" finished-at="2021-10-14T12:24:18 IST">
+  <suite name="Default suite" duration-ms="52" started-at="2021-10-15T19:08:37 IST" finished-at="2021-10-15T19:08:37 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="29674" started-at="2021-10-14T12:23:48 IST" finished-at="2021-10-14T12:24:18 IST">
-      <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting">
-        <test-method status="PASS" signature="TestSetup()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting@4e4aea35]" name="TestSetup" is-config="true" duration-ms="4535" started-at="2021-10-14T12:23:48 IST" finished-at="2021-10-14T12:23:53 IST">
+    <test name="Default test" duration-ms="52" started-at="2021-10-15T19:08:37 IST" finished-at="2021-10-15T19:08:37 IST">
+      <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting">
+        <test-method status="FAIL" signature="TestSetup(java.lang.String)[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting@1ee807c6]" name="TestSetup" is-config="true" duration-ms="-1634305117099" started-at="2021-10-15T19:08:37 IST" finished-at="1970-01-01T05:30:00 IST">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Parameter 'browserName' is required by BeforeTest on method TestSetup but has not been marked @Optional or defined
+in C:\Users\lperka\AppData\Local\Temp\testng-eclipse--481713812\testng-customsuite.xml]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Parameter 'browserName' is required by BeforeTest on method TestSetup but has not been marked @Optional or defined
+in C:\Users\lperka\AppData\Local\Temp\testng-eclipse--481713812\testng-customsuite.xml
+at org.testng.internal.Parameters.createParams(Parameters.java:270)
+at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:358)
+at org.testng.internal.Parameters.createParameters(Parameters.java:700)
+at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:168)
+at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:302)
+at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:637)
+at org.testng.TestRunner.beforeRun(TestRunner.java:627)
+at org.testng.TestRunner.run(TestRunner.java:589)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TestSetup -->
-        <test-method status="PASS" signature="LaunchGoClinicalAPP()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting@4e4aea35]" name="LaunchGoClinicalAPP" duration-ms="25044" started-at="2021-10-14T12:23:53 IST" finished-at="2021-10-14T12:24:18 IST">
+        <test-method status="SKIP" signature="LaunchGoClinicalAPP()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting@1ee807c6]" name="LaunchGoClinicalAPP" duration-ms="0" started-at="2021-10-15T19:08:37 IST" finished-at="2021-10-15T19:08:37 IST">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Parameter 'browserName' is required by BeforeTest on method TestSetup but has not been marked @Optional or defined
+in C:\Users\lperka\AppData\Local\Temp\testng-eclipse--481713812\testng-customsuite.xml]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Parameter 'browserName' is required by BeforeTest on method TestSetup but has not been marked @Optional or defined
+in C:\Users\lperka\AppData\Local\Temp\testng-eclipse--481713812\testng-customsuite.xml
+at org.testng.internal.Parameters.createParams(Parameters.java:270)
+at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:358)
+at org.testng.internal.Parameters.createParameters(Parameters.java:700)
+at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:168)
+at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:302)
+at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:637)
+at org.testng.TestRunner.beforeRun(TestRunner.java:627)
+at org.testng.TestRunner.run(TestRunner.java:589)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:371)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:332)
+at org.testng.SuiteRunner.run(SuiteRunner.java:276)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1212)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1134)
+at org.testng.TestNG.runSuites(TestNG.java:1063)
+at org.testng.TestNG.run(TestNG.java:1031)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchGoClinicalAPP -->
-        <test-method status="PASS" signature="CloseTest()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting@4e4aea35]" name="CloseTest" is-config="true" duration-ms="74" started-at="2021-10-14T12:24:18 IST" finished-at="2021-10-14T12:24:18 IST">
+        <test-method status="SKIP" signature="CloseTest()[pri:0, instance:com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting@1ee807c6]" name="CloseTest" is-config="true" duration-ms="-1634305117144" started-at="2021-10-15T19:08:37 IST" finished-at="1970-01-01T05:30:00 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseTest -->
-      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting -->
+      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

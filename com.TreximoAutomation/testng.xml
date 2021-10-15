@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test name="Test1">
-  <parameter name="Browser" value="chrome"></parameter>
+  <test name ="NewWorkOrder">
+  <parameter name="browserName" value="chrome"></parameter>
     <classes>
-      <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting"/>
+    <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting"/>
     </classes>
-    </test> <!-- Test1 -->
-    <test name="Test2">
+    </test>
+    <test name ="MyWorkOrders">
+    <parameter name="browserName" value="chrome"></parameter>
     <classes>
-      <class name="com.NurseUser_Execution_Classes.NurseUser_MyWorkOrders_AutoTestingForm1"/>
+    <class name="com.NurseUser_Execution_Classes.NurseUser_MyWorkOrders_AutoTestingForm1"/>
     </classes>
-    </test> <!-- Test2 -->
-    <test name="Test3">
+    </test>
+    <test name ="Records">
+    <parameter name="browserName" value="chrome"></parameter>
     <classes>
-      <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords"/>
+    <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting"/>
     </classes>
-  </test> <!-- Test3 -->
+    </test>
 </suite> <!-- Suite -->

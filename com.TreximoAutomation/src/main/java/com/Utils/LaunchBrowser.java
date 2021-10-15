@@ -21,34 +21,40 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ThreadGuard;
+import org.testng.annotations.Parameters;
 
 public class LaunchBrowser extends BasePages {
 	public static Properties TestSettingsObjects = null;
 	public static FileInputStream TestSettingsfile = null;
-	static String browserName = null;
+	
 
 	/**
 	 * Get the browser object specified in the property
+	 * @param browserName 
 	 * 
 	 * @param browserName
 	 * @return
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 */
+	
 	@SuppressWarnings({ "unused", "deprecation" })
-	public static void LaunchBrowserapp() throws IOException {
-
+	public static void LaunchBrowserapp(String browserName) throws IOException {
+	
+		
+		System.out.println("My Browser is " +browserName);
 		TestSettingsObjects = new Properties();
-	//	FileInputStream TestSettingsfile;
+		//FileInputStream TestSettingsfile;
 		TestSettingsfile = new FileInputStream(System.getProperty("user.dir") + "\\TestSettings.properties");
 		TestSettingsObjects.load(TestSettingsfile);
-		browserName = TestSettingsObjects.getProperty("Browser");
+		/*browserName = TestSettingsObjects.getProperty("Browser");*/
 
 		// final ThreadLocal<WebDriver> ThreadDriver = new ThreadLocal<WebDriver>();
 		// WebDriver driver = ThreadDriver.get();
-		if (browserName.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.firefox.marinette",
-					System.getProperty("user.dir") + "\\GeckoDriver\\geckodriver.exe");
+		if (browserName.equalsIgnoreCase("firefox")) {		
+			
+			System.setProperty("webdriver.gecko.driver",
+					System.getProperty("user.dir") + "\\Resources\\GeckoDriver\\geckodriver.exe");
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		}
@@ -91,10 +97,10 @@ public class LaunchBrowser extends BasePages {
 			//capabilities.setCapability("ignoreZoomSetting", true);
 			//capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
 
-			String testprop = System.getProperty("user.dir") + "\\IEDriver\\IEDriverServer.exe";
+			String testprop = System.getProperty("user.dir") + "\\Resources\\IEDriver\\IEDriverServer.exe";
 			System.out.println(testprop);
 			System.setProperty("webdriver.ie.driver",
-					System.getProperty("user.dir") + "\\IEDriver\\IEDriverServer.exe");
+					System.getProperty("user.dir") + "\\Resources\\IEDriver\\IEDriverServer.exe");
 			driver = new InternetExplorerDriver(Options);
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

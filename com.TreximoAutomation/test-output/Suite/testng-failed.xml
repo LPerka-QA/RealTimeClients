@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
-  <test thread-count="5" name="Test1(failed)">
-    <parameter name="Browser" value="chrome"/>
+  <test thread-count="5" name="NewWorkOrder(failed)">
+    <parameter name="browserName" value="chrome"/>
     <classes>
       <class name="com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting">
         <methods>
@@ -12,8 +12,9 @@
         </methods>
       </class> <!-- com.AdminUser_Execution_Classes.AdminUser_NewWorkOrder_AutomationTesting -->
     </classes>
-  </test> <!-- Test1(failed) -->
-  <test thread-count="5" name="Test2(failed)">
+  </test> <!-- NewWorkOrder(failed) -->
+  <test thread-count="5" name="MyWorkOrders(failed)">
+    <parameter name="browserName" value="chrome"/>
     <classes>
       <class name="com.NurseUser_Execution_Classes.NurseUser_MyWorkOrders_AutoTestingForm1">
         <methods>
@@ -23,5 +24,17 @@
         </methods>
       </class> <!-- com.NurseUser_Execution_Classes.NurseUser_MyWorkOrders_AutoTestingForm1 -->
     </classes>
-  </test> <!-- Test2(failed) -->
+  </test> <!-- MyWorkOrders(failed) -->
+  <test thread-count="5" name="Records(failed)">
+    <parameter name="browserName" value="chrome"/>
+    <classes>
+      <class name="com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting">
+        <methods>
+          <include name="TestSetup"/>
+          <include name="CloseTest"/>
+          <include name="LaunchGoClinicalAPP"/>
+        </methods>
+      </class> <!-- com.AdminUser_Execution_Classes.AdminUser_ReviewRecords_AutomationTesting -->
+    </classes>
+  </test> <!-- Records(failed) -->
 </suite> <!-- Failed suite [Suite] -->

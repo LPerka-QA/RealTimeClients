@@ -181,17 +181,8 @@ public class AdminUser_Records extends BasePages {
 	
 	public void ValidateLatestRecord(int row) throws IOException {
 		String ExpectedLatestRecord = data.Getdata("Expected Admin User Latest Record", row).trim();
-		if(driver.findElements(By.xpath("//td[text()='\"+WorkOrderNumber+\"']//..//td[text()='\"+Protocol+\"']//..//td[text()='\"+PatientID+\"']//..//td[text()='\"+Visit+\"']//..//td[text()='REVIEW']//..//td[text()='\"+RecordCreatedDate+\"']//..//td//a[contains(@href,'/records/')]") ).size() != 0)
-		{
 		verifyTextEqual(readonly_LatestRecord(), ExpectedLatestRecord,
-				"Validate latest Record");
-		}
-		else
-		{
-			clickOnLink(Lnk_Next(), "Send to Study Site");
-			verifyTextEqual(readonly_LatestRecord(), ExpectedLatestRecord,
 					"Validate latest Record");
-		}
 
 	}
 	
@@ -283,8 +274,18 @@ public class AdminUser_Records extends BasePages {
 		ClickRecordsHeader();
 		ValidateRecordsHeader(row);
 		AdminUser_Home(row);
-		BasePages.scrollElementIntoView(Lnk_Next());
-		ValidateLatestRecord(row);
+		if(driver.findElements(By.xpath("//td[text()='"+WorkOrderNumber+"']//..//td[text()='"+Protocol+"']//..//td[text()='"+PatientID+"']//..//td[text()='"+Visit+"']//..//td[text()='REVIEW']//..//td[text()='"+RecordCreatedDate+"']//..//td//a[contains(@href,'/records/')]") ).size() != 0)
+		{
+			BasePages.scrollElementIntoView(Lnk_ViewLatestRecord());
+			ValidateLatestRecord(row);
+		}
+		else
+		{
+			BasePages.scrollElementIntoView(Lnk_Next());
+			clickOnLink(Lnk_Next(), "Next");
+			BasePages.scrollElementIntoView(Lnk_ViewLatestRecord());
+			ValidateLatestRecord(row);
+		}		
 		ClickViewLatestRecord();
 		ValidateBloodPressureSystolic(row);
 		ValidateBloodPressureDiastolic(row);
@@ -301,8 +302,17 @@ public void AutomationTestingRecords(int row) throws IOException, InterruptedExc
 		ClickRecordsHeader();
 		ValidateRecordsHeader(row);
 		AdminUser_Home(row);
-		BasePages.scrollElementIntoView(Lnk_Next());
-		ValidateLatestRecord(row);
+		if(driver.findElements(By.xpath("//td[text()='"+WorkOrderNumber+"']//..//td[text()='"+Protocol+"']//..//td[text()='"+PatientID+"']//..//td[text()='"+Visit+"']//..//td[text()='REVIEW']//..//td[text()='"+RecordCreatedDate+"']//..//td//a[contains(@href,'/records/')]") ).size() != 0)
+		{
+			BasePages.scrollElementIntoView(Lnk_ViewLatestRecord());
+			ValidateLatestRecord(row);
+		}
+		else
+		{
+			BasePages.scrollElementIntoView(Lnk_Next());
+			clickOnLink(Lnk_Next(), "Next");
+			ValidateLatestRecord(row);
+		}	
 		ClickViewLatestRecord();
 		ValidateWorkOrdersID(row);
 		ValidatePatientID(row);
